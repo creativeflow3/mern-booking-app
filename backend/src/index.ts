@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import 'dotenv/config';
 import mongoose from 'mongoose';
+import path from 'path';
 import authRoutes from './routes/auth';
 import userRoutes from './routes/users';
 import cookieParser from 'cookie-parser';
@@ -22,6 +23,8 @@ app.use(
     credentials: true,
   }),
 );
+
+app.use(express.static(path.join(__dirname, '../../frontend/dist')));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
