@@ -1,4 +1,4 @@
-export type HotelType {
+export type HotelType = {
   _id: string;
   userId: string;
   name: string;
@@ -13,4 +13,4 @@ export type HotelType {
   starRating: number;
   imageUrls: string[];
   lastUpdated: Date;
-}
+};
