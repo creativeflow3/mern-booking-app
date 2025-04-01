@@ -1,4 +1,4 @@
-### Sample Hotel Booking App
+# Sample Hotel Booking App
 
 ## Technologies Used:
 
