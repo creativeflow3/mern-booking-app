@@ -78,8 +78,10 @@ const SearchBar = () => {
           endDate={checkOut}
           minDate={minDate}
           maxDate={maxDate}
+          placeholderText="Check-in Date"
           className="min-w-full bg-white p-2 focus:outline-none"
           wrapperClassName="min-w-full"
+          id="picker-checkin"
         />
       </div>
       <div>
@@ -91,8 +93,10 @@ const SearchBar = () => {
           endDate={checkOut}
           minDate={minDate}
           maxDate={maxDate}
+          placeholderText="Check-out Date"
           className="min-w-full bg-white p-2 focus:outline-none"
           wrapperClassName="min-w-full"
+          id="picker-checkout"
         />
       </div>
       <div className="flex gap-1">

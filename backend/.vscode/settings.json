@@ -29,7 +29,8 @@
   },
   "[typescript]": {
     "editor.formatOnSave": true,
-    "editor.formatOnPaste": true
+    "editor.formatOnPaste": true,
+    "editor.tabSize": 2
   },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
