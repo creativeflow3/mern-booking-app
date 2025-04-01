@@ -10,6 +10,9 @@
 - React Context
 - TailwindCSS
 - Stripe
+- Playright
+- TypeScript
+- React Query
 
 ## To Run
 
