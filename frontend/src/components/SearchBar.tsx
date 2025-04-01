@@ -79,7 +79,7 @@ const SearchBar = () => {
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="Check-in Date"
-          className="min-w-full bg-white p-2 focus:outline-none"
+          className="w-full m:min-w-full bg-white px-1 py-2 focus:outline-none"
           wrapperClassName="min-w-full"
           id="picker-checkin"
         />
@@ -94,7 +94,7 @@ const SearchBar = () => {
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="Check-out Date"
-          className="min-w-full bg-white p-2 focus:outline-none"
+          className="w-full m:min-w-full bg-white px-1 py-2 focus:outline-none"
           wrapperClassName="min-w-full"
           id="picker-checkout"
         />
@@ -103,7 +103,7 @@ const SearchBar = () => {
         <button className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500">
           Search
         </button>
-        <button className="w-1/3 bg-red-600 text-white h-full p-2 font-bold text-xl hover:bg-red-500">
+        <button className="w-1/3 bg-red-600 text-white h-full py-2 px-1 m:px-2 font-bold text-xl hover:bg-red-500">
           Clear
         </button>
       </div>
