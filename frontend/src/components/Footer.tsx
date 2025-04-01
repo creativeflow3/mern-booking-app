@@ -5,7 +5,7 @@ const Footer = () => {
         <span className="text-l m:text-3xl text-white font-bold tracking-tight">
           McneilHolidays.com
         </span>
-        <span className="text-white font-bold tracking-tight flex gap-4">
+        <span className="text-white m:font-bold tracking-tight flex gap-4">
           <p className="cursor-pointer">Privacy</p>
           <p className="cursor-pointer">Terms of Service</p>
         </span>
