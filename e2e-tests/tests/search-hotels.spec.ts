@@ -51,6 +51,8 @@ test("should book hotel", async ({ page }) => {
   const formattedDate = date.toISOString().split("T")[0];
   await page.getByPlaceholder("Check-out Date").fill(formattedDate);
 
+  await page.waitForTimeout(500);
+
   await page.getByRole("button", { name: "Search" }).click();
 
   await page.getByText("Dublin Getaways").click();
@@ -68,4 +70,7 @@ test("should book hotel", async ({ page }) => {
 
   await page.getByRole("button", { name: "Confirm Booking" }).click();
   await expect(page.getByText("Booking Saved!")).toBeVisible();
+
+  await page.getByRole("link", { name: "My Bookings" }).click();
+  await expect(page.getByText("Dublin Getaways")).toBeVisible();
 });
