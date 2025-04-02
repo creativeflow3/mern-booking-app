@@ -20,7 +20,7 @@ const Detail = () => {
   }
 
   return (
-    <div className="space-y-6 px-4 m:px-0">
+    <div className="space-y-6 px-4 md:px-0">
       <div>
         <span className="flex">
           {Array.from({ length: hotel.starRating }).map(() => (
