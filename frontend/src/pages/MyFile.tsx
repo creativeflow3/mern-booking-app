@@ -1,1 +1,0 @@
-const va = 'hi';
