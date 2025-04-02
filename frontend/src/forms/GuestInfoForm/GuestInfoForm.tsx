@@ -45,6 +45,10 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
   maxDate.setFullYear(maxDate.getFullYear() + 1);
 
   const onSignInClick = (data: GuestInfoFormData) => {
+    // date problems, missing date or checkIn is after checkOut
+    if (!data.checkIn || !data.checkOut || data.checkIn > data.checkOut) {
+      return;
+    }
     search.saveSearchValues(
       '',
       data.checkIn,
@@ -56,6 +60,10 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
   };
 
   const onSubmit = (data: GuestInfoFormData) => {
+    // date problems, missing date or checkIn is after checkOut
+    if (!data.checkIn || !data.checkOut || data.checkIn > data.checkOut) {
+      return;
+    }
     search.saveSearchValues(
       '',
       data.checkIn,

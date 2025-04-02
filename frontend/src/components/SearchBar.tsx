@@ -16,6 +16,12 @@ const SearchBar = () => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+
+    // date problems, missing date or checkIn is after checkOut
+    if (!checkIn || !checkOut || checkIn > checkOut) {
+      return;
+    }
+
     search.saveSearchValues(
       destination,
       checkIn,
