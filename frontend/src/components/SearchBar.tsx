@@ -11,6 +11,7 @@ const SearchBar = () => {
   const [destination, setDestination] = useState<string>(search.destination);
   const [checkIn, setCheckIn] = useState<Date>(search.checkIn);
   const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
+  const [dateError, setDateError] = useState<boolean>(false);
   const [adultCount, setAdultCount] = useState<number>(search.adultCount);
   const [childCount, setChildCount] = useState<number>(search.childCount);
 
@@ -19,9 +20,10 @@ const SearchBar = () => {
 
     // date problems, missing date or checkIn is after checkOut
     if (!checkIn || !checkOut || checkIn > checkOut) {
+      setDateError(true);
       return;
     }
-
+    setDateError(false);
     search.saveSearchValues(
       destination,
       checkIn,
@@ -32,9 +34,34 @@ const SearchBar = () => {
     navigate('/search');
   };
 
+  const handleDateChange = (date: Date, type: string) => {
+    if (!date) {
+      // setDateError(true);
+      return;
+    }
+    if (type === 'checkIn') {
+      setCheckIn(date);
+      if (date > checkOut) {
+        setDateError(true);
+      } else {
+        setDateError(false);
+      }
+    }
+    if (type === 'checkOut') {
+      setCheckOut(date);
+      if (date < checkIn) {
+        setDateError(true);
+      } else {
+        setDateError(false);
+      }
+    }
+  };
+
   const minDate = new Date();
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() + 1);
+
+  const errorBord = ' border-4 border-solid border-red-500';
 
   return (
     <form
@@ -78,14 +105,17 @@ const SearchBar = () => {
       <div>
         <DatePicker
           selected={checkIn}
-          onChange={(date) => setCheckIn(date as Date)}
+          // onChange={(date) => setCheckIn(date as Date)}
+          onChange={(date) =>
+            handleDateChange(date as Date, 'checkIn' as string)
+          }
           selectsStart
           startDate={checkIn}
           endDate={checkOut}
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="Check-in Date"
-          className="w-full m:min-w-full bg-white px-1 py-2 focus:outline-none"
+          className={`w-full m:min-w-full bg-white px-1 py-2 focus:outline-none${dateError ? errorBord : ''}`}
           wrapperClassName="min-w-full"
           id="picker-checkin"
         />
@@ -93,14 +123,17 @@ const SearchBar = () => {
       <div>
         <DatePicker
           selected={checkOut}
-          onChange={(date) => setCheckOut(date as Date)}
+          // onChange={(date) => setCheckOut(date as Date)}
+          onChange={(date) =>
+            handleDateChange(date as Date, 'checkOut' as string)
+          }
           selectsStart
           startDate={checkIn}
           endDate={checkOut}
           minDate={minDate}
           maxDate={maxDate}
           placeholderText="Check-out Date"
-          className="w-full m:min-w-full bg-white px-1 py-2 focus:outline-none"
+          className={`w-full m:min-w-full bg-white px-1 py-2 focus:outline-none${dateError ? errorBord : ''}`}
           wrapperClassName="min-w-full"
           id="picker-checkout"
         />
