@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useSearchContext } from '../../context/SearchContext';
 import { useAppContext } from '../../context/AppContext';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 type Props = {
   hotelId: string;
@@ -21,6 +22,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
   const { isLoggedIn } = useAppContext();
   const navigate = useNavigate();
   const location = useLocation();
+  const [dateError, setDateError] = useState<boolean>(false);
 
   const {
     watch,
@@ -74,6 +76,32 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
     navigate(`/hotel/${hotelId}/booking`);
   };
 
+  const handleDateChange = (date: Date, type: 'checkIn' | 'checkOut') => {
+    if (!date) {
+      return;
+    }
+
+    setValue(type, date);
+
+    if (type === 'checkIn') {
+      if (date > checkOut) {
+        setDateError(true);
+      } else {
+        setDateError(false);
+      }
+    }
+
+    if (type === 'checkOut') {
+      if (date < checkIn) {
+        setDateError(true);
+      } else {
+        setDateError(false);
+      }
+    }
+  };
+
+  const errorBord = ' border-4 border-solid border-red-500';
+
   return (
     <div className="flex flex-col p-4 bg-blue-200 gap-4">
       <h3 className="text-md font-bold">${pricePerNight}</h3>
@@ -87,14 +115,14 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
             <DatePicker
               required
               selected={checkIn}
-              onChange={(date) => setValue('checkIn', date as Date)}
+              onChange={(date) => handleDateChange(date as Date, 'checkIn')} // Use the handleDateChange to set the value and check for errors
               selectsStart
               startDate={checkIn}
               endDate={checkOut}
               minDate={minDate}
               maxDate={maxDate}
               placeholderText="Check-in date"
-              className="min-w-full bg-white p-2 focus:outline-none"
+              className={`min-w-full bg-white p-2 focus:outline-none${dateError ? errorBord : ''}`}
               wrapperClassName="min-w-full"
             />
           </div>
@@ -102,14 +130,14 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
             <DatePicker
               required
               selected={checkOut}
-              onChange={(date) => setValue('checkOut', date as Date)}
+              onChange={(date) => handleDateChange(date as Date, 'checkOut')} // Use the handleDateChange to set the value and check for errors
               selectsStart
               startDate={checkIn}
               endDate={checkOut}
               minDate={minDate}
               maxDate={maxDate}
               placeholderText="Check-out date"
-              className="min-w-full bg-white p-2 focus:outline-none"
+              className={`min-w-full bg-white p-2 focus:outline-none${dateError ? errorBord : ''}`}
               wrapperClassName="min-w-full"
             />
           </div>
